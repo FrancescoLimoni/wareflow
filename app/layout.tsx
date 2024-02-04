@@ -1,25 +1,30 @@
+'use client'
+
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
+import { usePathname } from "next/navigation";
+import SideMenu from "@/components/SideMenu";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
 
-export const metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
-};
+export default function RootLayout({ children }: { children: React.ReactNode; }) {
+  const pathname = usePathname()
+  const hideSideBar = () => {
+    if (pathname.includes('/dashboard')) return false
+    if (pathname.includes('/contacts')) return false
+    if (pathname.includes('/orders')) return false
+    if (pathname.includes('/packaging')) return false
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+
+    return true
+  }
+
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
+      <body className="row bg-background text-foreground overflow-hidden">
+        {
+          hideSideBar() ? null : <SideMenu />
+        }
+        <main className="w-screen h-screen flex flex-col items-start">
           {children}
         </main>
       </body>

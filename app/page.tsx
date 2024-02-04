@@ -1,57 +1,50 @@
-import DeployButton from "../components/DeployButton";
-import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/SignUpUserSteps";
-import Header from "@/components/Header";
-import { cookies } from "next/headers";
+import Image from 'next/image'
+import image from '@/public/warehouse.png'
+import astrocode_logo from '@/public/astrocode_logo.png'
+import wareflow_logo from '@/public/wareflow_logo.png'
+import { Audiowide } from 'next/font/google'
+import LoginForm from '@/components/login/LoginForm'
+import Link from 'next/link'
 
-export default async function Index() {
-  const cookieStore = cookies();
+const audiowide = Audiowide({
+  weight: ['400'],
+  subsets: ['latin'],
+})
 
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient(cookieStore);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
+const defaultUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
 
-  const isSupabaseConnected = canInitSupabaseClient();
+export const metadata = {
+  metadataBase: new URL(defaultUrl),
+  title: "Wareflow",
+  description: 'Warehouse management system',
+};
 
-  return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-          <DeployButton />
-          {isSupabaseConnected && <AuthButton />}
+export default function LoginPage() {
+  return <main className='row h-screen w-screen overflow-hidden'>
+    <Image src={image} alt={'background image'} className='w-[56%] h-full flex' style={{ "objectFit": "cover" }} />
+    <div className='col w-[44%] p-6 bg-background space-y-8 animate-in'>
+
+      {/* LOGIN HEADER */}
+      <div className='row w-full h-fit space-x-6 items-center'>
+        {/* <Image src={wareflow_logo} alt={'wareflow logo'} layout='fit' className='w-12 h-12' /> */}
+        <div className='col'>
+          <h1 className={audiowide.className}>Log in</h1>
+          <p>If you already have an active account please enter your credential and click on login. Otherwise create a new one and join the community</p>
         </div>
-      </nav>
-
-      <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
-        <Header />
-        <main className="flex-1 flex flex-col gap-6">
-          <h2 className="font-bold text-4xl mb-4">Next steps</h2>
-          {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-        </main>
       </div>
-
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p>
-          Powered by{" "}
-          <a
-            href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-            target="_blank"
-            className="font-bold hover:underline"
-            rel="noreferrer"
-          >
-            Supabase
-          </a>
-        </p>
-      </footer>
+      <LoginForm />
+      {/* POWER BY */}
+      <div className='row space-x-4 items-center w-full justify-center'>
+        <label className='font-medium opacity-60'>{'Powered by'}</label>
+        <div className='row space-x-2'>
+          <Image src={astrocode_logo} alt={'AstroCode logo'} layout='cover' className='w-8' />
+          <p>{'AstroCode'}
+            <span className='text-xs font-medium'>{' S.R.L'}</span>
+          </p>
+        </div>
+      </div>
     </div>
-  );
+  </main>
 }
