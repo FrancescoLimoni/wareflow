@@ -13,36 +13,31 @@ import { useFormState, useFormStatus } from "react-dom";
 import { Toaster } from "../ui/toaster";
 import { useToast } from "@/components/ui/use-toast"
 import { ColInput } from '@/components/ColumInput';
+import { AuthError } from "@supabase/supabase-js";
 
 export default function SignupForm() {
     const { toast } = useToast()
-    const [state, formAction] = useFormState(signUpUser, null);
-    const createToast = () => {
-        if (state != null) {
-            const obj = JSON.parse(state) as errorType;
-            console.log('state: ' + state)
-
-            if (obj.status != '200') return toast({
-                title: obj.name,
-                description: obj.message,
-                className: 'bg-red-500 text-white animate-in',
-                variant: 'destructive',
-            })
-        }
-
+    const ErrorToast = (error: AuthError) => {
         return toast({
-            title: 'ACCOUNT CREATED',
-            description: "Congrats, you've created your account",
-            className: 'bg-green-500 text-white',
-        })
+            title: `${error.message.toUpperCase()} - code: ${error.status}`,
+            description: `${error.cause}`,
+            className: 'bg-red-500 text-white animate-in',
+            variant: 'destructive',
+
+        });
+    }
+    const SuccessToast = () => {
+        return toast({
+            title: 'Welcome back!',
+            description: 'You are now logged in',
+            className: 'bg-green-500 text-white animate-in',
+            variant: 'default',
+        });
     }
 
     return (
         <form
-            action={(formData) => {
-                formAction(formData);
-                createToast()
-            }}
+            action={onSubmit}
             className='col h-full w-full px-10 space-y-6 items-center justify-center'>
             <div className='row space-x-6 w-full'>
                 <ColInput type={'string'} label={'Firstname'} name={'firstname'} placeholder={'Firstname'} isRequired={true} />
@@ -72,14 +67,18 @@ export default function SignupForm() {
         const isLoading = data.pending;
 
         return <Button
-            formAction={(formData) => {
-                formAction(formData);
-                createToast()
-            }}
             disabled={isLoading}
             className='w-full'>
             {isLoading ? 'Loading' : 'Create account'}
         </Button>
+    }
+
+    async function onSubmit(data: FormData) {
+        const resp = await signUpUser(data)
+
+        if (resp as AuthError) return ErrorToast(resp as AuthError);
+
+        return SuccessToast();
     }
 
 }

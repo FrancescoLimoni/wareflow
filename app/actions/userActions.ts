@@ -17,7 +17,9 @@ export const signOutUser = async () => {
   return redirect("/");
 };
 
-export const signInUser = async (email: string, password: string) => {
+export const signInUser = async (formData: FormData) => {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -29,13 +31,13 @@ export const signInUser = async (email: string, password: string) => {
   return redirect("/dashboard");
 };
 
-export const signUpUser = async (previousState: any, formData: FormData) => {
+export const signUpUser = async (formData: FormData) => {
   const firstname = formData.get("firstname") as string;
   const lastname = formData.get("lastname") as string;
-  const phone_number = formData.get("phone_number") as string;
+  const phone = formData.get("phone") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const confirm_password = formData.get("password") as string;
+  const confirmPassword = formData.get("confirm-password") as string;
   const cookieStore = cookies();
   const supabase = createSupabaseServerClient(cookieStore);
 
@@ -47,7 +49,7 @@ export const signUpUser = async (previousState: any, formData: FormData) => {
     },
   });
 
-  if (error) return JSON.stringify(error);
+  if (error) return error;
 
   console.log("User created");
   return null;

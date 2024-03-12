@@ -80,15 +80,13 @@ export default function LoginForm() {
     }
 
     async function onSubmit(data: FormData) {
-        const email = data.get("email") as string;
-        const password = data.get("password") as string;
-        const resp = await signInUser(email, password);
+        const resp = await signInUser(data);
 
         if (resp as AuthError) return ErrorToast(resp);
 
 
         console.log(resp);
-        SuccessToast();
+        return SuccessToast();
     }
 }
 
