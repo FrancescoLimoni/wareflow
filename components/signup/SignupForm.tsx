@@ -30,15 +30,6 @@ export default function SignupForm() {
             })
         }
 
-        // if (state.includes('AuthApiError')) {
-        //     return toast({
-        //         title: 'CREATE ACCOUNT ERROR OCCURRED',
-        //         description: obj.name + ' - ' + obj.message,
-        //         className: 'bg-red-500 text-white animate-in',
-        //         variant: 'destructive',
-        //     })
-        // }
-
         return toast({
             title: 'ACCOUNT CREATED',
             description: "Congrats, you've created your account",

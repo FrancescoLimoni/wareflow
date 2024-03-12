@@ -6,59 +6,31 @@ import { Button } from "../ui/button";
 import { useFormState, useFormStatus } from "react-dom";
 import { Toaster } from "../ui/toaster";
 import { useToast } from "@/components/ui/use-toast"
+import { AuthError } from "@supabase/supabase-js";
 
 export default function LoginForm() {
     const { toast } = useToast()
-    const [state, formAction] = useFormState(signInUser, null);
-    const createToast = () => {
-        let title = '';
-        let description = '';
-        type errorType = {
-            "name": string,
-            "message": string,
-            "status": string,
-        }
+    const ErrorToast = (error: AuthError) => {
+        return toast({
+            title: `${error.message.toUpperCase()} - code: ${error.status}`,
+            description: `${error.cause}`,
+            className: 'bg-red-500 text-white animate-in',
+            variant: 'destructive',
 
-
-        if (state == null) return
-        const isString = typeof state === 'string';
-
-        if (isString && state.includes('AuthApiError')) {
-            const obj = JSON.parse(state) as errorType;
-            title = 'LOGIN ERROR OCCURRED';
-            description = obj.name + ' - ' + obj.message;
-
-            return toast({
-                title: title,
-                description: description,
-                className: 'bg-red-500 text-white animate-in',
-                variant: 'destructive',
-
-            })
-        } else {
-            const stateString = JSON.stringify(state)
-            const obj = JSON.parse(stateString);
-            title = 'Success';
-            description = 'You have successfully logged in';
-            return toast({
-                title: title,
-                description: description,
-                className: 'bg-green-500 text-white',
-
-            })
-        }
-
-
-
+        });
     }
-
+    const SuccessToast = () => {
+        return toast({
+            title: 'Welcome back!',
+            description: 'You are now logged in',
+            className: 'bg-green-500 text-white animate-in',
+            variant: 'default',
+        });
+    }
 
     return (
         <form
-            action={(formData) => {
-                formAction(formData);
-                createToast()
-            }}
+            action={onSubmit}
             className='col h-full w-full px-10 space-y-6 items-center justify-center'>
             <div className='col space-y-1 w-full'>
                 <label htmlFor='email'>{'Email'}</label>
@@ -101,14 +73,23 @@ export default function LoginForm() {
         const isLoading = data.pending;
 
         return <Button
-            formAction={(formData) => {
-                formAction(formData);
-                createToast()
-            }}
             disabled={isLoading}
             className='w-full'>
             {isLoading ? 'Loading' : 'Log in'}
         </Button>
     }
 
+    async function onSubmit(data: FormData) {
+        const email = data.get("email") as string;
+        const password = data.get("password") as string;
+        const resp = await signInUser(email, password);
+
+        if (resp as AuthError) return ErrorToast(resp);
+
+
+        console.log(resp);
+        SuccessToast();
+    }
 }
+
+
