@@ -28,8 +28,8 @@ export function DataTableContacts<TData, TValue>({ columns, data }: DataTablePro
     })
 
     return (
-        <div className="rounded-md border">
-            <Table>
+        <div className="w-full h-full rounded-md border">
+            <Table className="w-full h-full">
                 <TableHeader>
                     {
                         table.getHeaderGroups().map((headerGroup) => (
@@ -53,7 +53,7 @@ export function DataTableContacts<TData, TValue>({ columns, data }: DataTablePro
                         ))
                     }
                 </TableHeader>
-                <TableBody>
+                <TableBody className="w-full h-full">
                     {
                         table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
@@ -76,9 +76,9 @@ export function DataTableContacts<TData, TValue>({ columns, data }: DataTablePro
                                 </TableRow>
                             ))
                         ) : (
-                            <TableRow>
-                                <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
+                            <TableRow className="h-full bg-red-100">
+                                <TableCell colSpan={columns.length} className="text-center">
+                                    <h5>No results.</h5>
                                 </TableCell>
                             </TableRow>
                         )
