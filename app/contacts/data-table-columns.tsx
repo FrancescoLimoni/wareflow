@@ -37,7 +37,7 @@ export const dataTableColumns: ColumnDef<Contact>[] = [
 export const contacts: Contact[] = [
     {
         id: '1',
-        avatar: 'https://randomuser.me/api/portraits',
+        avatar: '/assets/avatar1.png',
         firstname: 'John',
         lastname: 'Doe',
         email: 'john.doe@email.com',
@@ -46,7 +46,7 @@ export const contacts: Contact[] = [
     },
     {
         id: '2',
-        avatar: 'https://randomuser.me/api/portraits',
+        avatar: '/assets/avatar2.png',
         firstname: 'Albert',
         lastname: 'Smith',
         email: 'albert.smith@email.com',
@@ -55,7 +55,7 @@ export const contacts: Contact[] = [
     },
     {
         id: '3',
-        avatar: 'https://randomuser.me/api/portraits',
+        avatar: '/assets/avatar3.png',
         firstname: 'Evelyn',
         lastname: 'Martinez',
         email: 'evelyn.martinez@email.com',
@@ -63,7 +63,7 @@ export const contacts: Contact[] = [
         type: 'employee',
     }, {
         id: '4',
-        avatar: 'https://randomuser.me/api/portraits',
+        avatar: '/assets/avatar2.png',
         firstname: 'Fernando',
         lastname: 'Gonzalez',
         email: 'fernando.gonzalez@email.com',
