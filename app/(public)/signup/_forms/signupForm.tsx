@@ -6,7 +6,7 @@ type errorType = {
     "status": string,
 }
 
-import { signInUser, signUpUser } from "@/app/actions/userActions";
+import { signUpUser } from "@/app/actions/userActions";
 import Link from "next/link";
 import { Button } from "../../../../components/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
@@ -69,7 +69,7 @@ export default function SignupForm() {
         return <Button
             disabled={isLoading}
             className='w-full'>
-            {isLoading ? 'Loading' : 'Create account'}
+            {isLoading ? 'Loading...' : 'Create account'}
         </Button>
     }
 

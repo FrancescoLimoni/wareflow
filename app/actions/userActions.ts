@@ -41,15 +41,37 @@ export const signUpUser = async (formData: FormData) => {
   const cookieStore = cookies();
   const supabase = createClientServer(cookieStore);
 
+
   const { error } = await supabase.auth.signUp({
-    email,
-    password,
+    email: email,
+    phone: phone,
+    password: password,
     options: {
-      // emailRedirectTo: `${origin}/auth/callback`
+      data: {
+        firstname: firstname,
+        lastname: lastname,
+        phone: phone,
+        email: email,
+      },
     },
   });
 
-  if (error) return error;
+  // const { error } = await supabase.auth.signUp({
+  //   email,
+  //   password,
+  //   options: {
+  //     data: {
+  //       firstname: firstname,
+  //       lastname: lastname,
+  //       phone: phone,
+  //     },
+  //   },
+  // });
+
+  if (error) {
+    console.log('error: ', error);
+    return error
+  };
 
   console.log("User created");
   return null;
