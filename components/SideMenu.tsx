@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import wareflow_logo from '@/public/wareflow_logo.png'
 import { Audiowide } from 'next/font/google'

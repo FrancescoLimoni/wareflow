@@ -2,7 +2,7 @@ import Image from 'next/image'
 import image from '@/public/warehouse2.png'
 import astrocode_logo from '@/public/astrocode_logo.png'
 import { Audiowide } from 'next/font/google'
-import SignupForm from '@/components/signup/SignupForm'
+import SignupForm from '@/app/(public)/signup/_forms/signupForm'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 

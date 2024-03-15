@@ -8,9 +8,9 @@ type errorType = {
 
 import { signInUser, signUpUser } from "@/app/actions/userActions";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../../../../components/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
-import { Toaster } from "../ui/toaster";
+import { Toaster } from "../../../../components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast"
 import { ColInput } from '@/components/ColumInput';
 import { AuthError } from "@supabase/supabase-js";
