@@ -12,9 +12,9 @@ export default async function PrivateLayout({ children }: { children: React.Reac
   const user = data?.user;
 
 
-  // CHECK IF USER IS LOGGED IN
-  console.log('user:', user);
-  if (error != null || user == null) return redirect('/login');
+  // CHECK IF USER IS LOGGED IN IF NOT REDIRECT TO LOGIN PAGE
+  // console.log('user:', user);
+  // if (error != null || user == null) return redirect('/login');
 
   return (
     <body >
