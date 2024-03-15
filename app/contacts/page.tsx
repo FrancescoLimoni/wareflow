@@ -2,10 +2,20 @@
 
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import { Plus } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { contacts } from "./data-table-columns";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import InvitationForm from "./_forms/invitationForm";
+
 
 export default function ContactsPage() {
     const tabs = ['All', 'Client', 'Supplier', 'Employee'];
@@ -21,7 +31,7 @@ export default function ContactsPage() {
 
     useEffect(() => {
         filterTableData();
-    }, [selection]);
+    }, [selection, contacts]);
 
     return <main className='col p-4 w-full h-full space-y-4'>
         <div className="row justify-between items-center">
@@ -39,10 +49,16 @@ export default function ContactsPage() {
 
                 </ol>
             </div>
-            <Link className="bg-pink-500 rounded-full p-2 w-fit h-fit shadow-md hover:bg-pink-600" href={"/newContact"}>
-                <Plus size={20} color="white" />
-            </Link>
+            <Dialog>
+                <DialogTrigger className="p-2 rounded-md text-sm bg-pink-500 text-white hover:bg-pink-600">{'New contact'}</DialogTrigger>
+                <DialogContent>
+                    <DialogTitle>New contact</DialogTitle>
+                    <DialogDescription>Please fill the form to send an invitation to your new contact</DialogDescription>
+                    <InvitationForm />
+                </DialogContent>
+            </Dialog>
         </div>
+        {/* TABLE */}
         <div className="rounded-md border w-full h-full">
             {/* HEADER */}
             <ol className="row p-2 bg-black/5 space-x-1">
@@ -56,31 +72,31 @@ export default function ContactsPage() {
             {/* BODY */}
             <div className="col w-full h-full">
                 {
-                    tableData.map((contact, index) =>
-                        <div key={index} className="col space-y-1">
-                            <Link key={index} href={`/contacts/${contact.id}`} className="row m-2 px-2 py-1 rounded-md items-center space-x-1 hover:bg-black/5">
-                                <div className="row space-x-0 flex-1 items-center ">
-                                    <Image src={contact.avatar} alt={contact.avatar} width={24} height={24} className="w-6 h-6 bg-black/10 rounded-full" />
-                                    <p className={cellStyle + 'flex-1'}>{contact.firstname + ' ' + contact.lastname}</p>
-                                </div>
-                                <p className={cellStyle + 'flex-1'}>{contact.email}</p>
-                                <p className={cellStyle + 'flex-1'}>{contact.phone}</p>
-                                <div className='w-28'>
-                                    <p className={"flex w-fit px-2 py-[3px] rounded-md items-center justify-center text-xs font-medium bg-pink-100 text-pink-600"}>
-                                        {contact.type}
-                                    </p>
-                                </div>
-                                <p className={'w-10'}>...</p>
+                    tableData.map(
+                        (contact, index) =>
+                            <div key={index} className="col space-y-1">
+                                <Link key={index} href={`/contacts/${contact.id}`} className="row m-2 px-2 py-1 rounded-md items-center space-x-1 hover:bg-black/5">
+                                    <div className="row space-x-0 flex-1 items-center ">
+                                        <Image src={contact.avatar} alt={contact.avatar} width={24} height={24} className="w-6 h-6 bg-black/10 rounded-full" />
+                                        <p className={cellStyle + 'flex-1'}>{contact.firstname + ' ' + contact.lastname}</p>
+                                    </div>
+                                    <p className={cellStyle + 'flex-1'}>{contact.email}</p>
+                                    <p className={cellStyle + 'flex-1'}>{contact.phone}</p>
+                                    <div className='w-28'>
+                                        <p className={"flex w-fit px-2 py-[3px] rounded-md items-center justify-center text-xs font-medium bg-pink-100 text-pink-600"}>
+                                            {contact.type}
+                                        </p>
+                                    </div>
+                                    <p className={'w-10'}>...</p>
 
-                            </Link>
-                            <Separator className="h-[1px] w-full bg-black/20 " />
-                        </div>
+                                </Link>
+                                <Separator className="h-[1px] w-full bg-black/20 " />
+                            </div>
 
                     )
                 }
             </div>
         </div>
-        {/* <DataTableContacts columns={dataTableColumns} data={tableData} /> */}
     </main >
 
     // METHODS
@@ -89,32 +105,15 @@ export default function ContactsPage() {
     }
 
     function filterTableData() {
-        console.log(`selection: ${selection}`);
-        console.log(`tab: ${tabs[selection]}`);
-        const contactsFiltered = contacts.filter(contact => {
-            if (tabs[selection] == 'All') return true;
-            return contact.type == tabs[selection].toLowerCase();
-        });
+        const contactsFiltered = contacts.filter(
+            contact => {
+                if (tabs[selection] == 'All') return true;
+                return contact.type == tabs[selection].toLowerCase();
+            }
+        );
 
-        contactsFiltered.map(contact => console.log(contact));
         setTableData(contactsFiltered);
     }
 
-    function getTypeColor(type: string) {
-        switch (type) {
-            case 'client':
-                return 'bg-pink-100 text-pink-700';
-            case 'supplier':
-                return 'bg-purple-100 text-purple-700';
-            case 'employee':
-                return 'bg-fuchsia-100 text-fuchsia-700';
-            default:
-                return 'bg-pink-100 text-pink-700';
-        }
-    }
-
-    function handleNewContact() {
-        console.log('new contact');
-    }
 
 }

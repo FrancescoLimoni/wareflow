@@ -1,7 +1,8 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-type Contact = {
+
+export type Contact = {
     id: string,
     avatar: string,
     firstname: string,
@@ -61,7 +62,8 @@ export const contacts: Contact[] = [
         email: 'evelyn.martinez@email.com',
         phone: '+1 214029472',
         type: 'employee',
-    }, {
+    },
+    {
         id: '4',
         avatar: '/assets/avatar2.png',
         firstname: 'Fernando',
