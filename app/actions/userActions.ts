@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { headers, cookies } from "next/headers";
-import { createSupabaseServerClient } from "@/utils/supabase/server";
+import { createClientServer } from "@/utils/supabase/server";
 import { createClient } from "@/utils/supabase/client";
 import { AuthError } from "@supabase/supabase-js";
 
@@ -39,7 +39,7 @@ export const signUpUser = async (formData: FormData) => {
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirm-password") as string;
   const cookieStore = cookies();
-  const supabase = createSupabaseServerClient(cookieStore);
+  const supabase = createClientServer(cookieStore);
 
   const { error } = await supabase.auth.signUp({
     email,
