@@ -68,7 +68,7 @@ export default function SideMenu() {
     }
 
     const isActive = (href: string) => {
-        if (usePathname().includes(href)) return true
+        if (usePathname().endsWith(href)) return true
         return false
     }
 

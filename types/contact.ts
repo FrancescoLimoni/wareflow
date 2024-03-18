@@ -6,5 +6,5 @@ export type TContact = {
     lastname: string,
     email: string,
     phone: string,
-    type: 'client' | 'supplier' | 'employee' | 'Undefined',
+    type: 'client' | 'supplier' | 'employee' | 'undefined',
 }

@@ -15,10 +15,11 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import InvitationForm from "./_forms/invitationForm";
+import { table } from "console";
 
 
 export default function ContactsPage() {
-    const tabs = ['All', 'Client', 'Supplier', 'Employee'];
+    const tabs = ['All', 'Client', 'Supplier', 'Employee', 'Undefined'];
     const headers = ['Name', 'Email', 'Phone', 'Type', ''];
     const [selection, setSelection] = useState(0);
     const [tableData, setTableData] = useState(CONTACTS);
@@ -72,34 +73,45 @@ export default function ContactsPage() {
             {/* BODY */}
             <div className="col w-full h-full">
                 {
-                    tableData.map(
-                        (contact, index) =>
-                            <div key={index} className="col space-y-1">
-                                <Link key={index} href={`/contacts/${contact.id}`} className="row m-2 px-2 py-1 rounded-md items-center space-x-1 hover:bg-black/5">
-                                    <div className="row space-x-0 flex-1 items-center ">
-                                        <Image src={contact.avatar} alt={contact.avatar} width={24} height={24} className="w-6 h-6 bg-black/10 rounded-full" />
-                                        <p className={cellStyle + 'flex-1'}>{contact.firstname + ' ' + contact.lastname}</p>
-                                    </div>
-                                    <p className={cellStyle + 'flex-1'}>{contact.email}</p>
-                                    <p className={cellStyle + 'flex-1'}>{contact.phone}</p>
-                                    <div className='w-28'>
-                                        <p className={"flex w-fit px-2 py-[3px] rounded-md items-center justify-center text-xs font-medium bg-pink-100 text-pink-600"}>
-                                            {contact.type}
-                                        </p>
-                                    </div>
-                                    <p className={'w-10'}>...</p>
-
-                                </Link>
-                                <Separator className="h-[1px] w-full bg-black/20 " />
-                            </div>
-
-                    )
+                    tableData.length > 0 ? createTable() : createEmptyView()
                 }
             </div>
         </div>
     </main >
 
     // METHODS
+    function createEmptyView() {
+        return <section className="col w-full h-full items-center justify-center ">
+            <h5 className="text-black/50">No contacts found</h5>
+            <p className="text-sm text-black/50">Looks like you don't have any contacts with this type</p>
+        </section>
+    }
+
+    function createTable() {
+        return tableData.map(
+            (contact, index) =>
+                <section key={index} className="col space-y-1">
+                    <Link key={index} href={`/contacts/${contact.id}`} className="row m-2 px-2 py-1 rounded-md items-center space-x-1 hover:bg-black/5">
+                        <div className="row space-x-0 flex-1 items-center ">
+                            <Image src={contact.avatar} alt={contact.avatar} width={28} height={28} style={{ objectFit: "cover" }} className="w-7 h-7 bg-black/10 rounded-full" />
+                            <p className={cellStyle + 'flex-1'}>{contact.firstname + ' ' + contact.lastname}</p>
+                        </div>
+                        <p className={cellStyle + 'flex-1'}>{contact.email}</p>
+                        <p className={cellStyle + 'flex-1'}>{contact.phone}</p>
+                        <div className='w-28'>
+                            <p className={"flex w-fit px-2 py-[3px] rounded-md items-center justify-center text-xs font-medium bg-pink-100 text-pink-600"}>
+                                {contact.type}
+                            </p>
+                        </div>
+                        <p className={'w-10'}>...</p>
+
+                    </Link>
+                    <Separator className="h-[1px] w-full bg-black/20 " />
+                </section>
+
+        );
+    }
+
     function handleTabCliccked(index: number) {
         setSelection(prev => index);
     }

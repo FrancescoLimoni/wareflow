@@ -36,7 +36,7 @@ export const WAREHOUSES = [
 export const CONTACTS: TContact[] = [
     {
         id: '1',
-        avatar: '/assets/avatar1.png',
+        avatar: '/assets/man1.jpg',
         firstname: 'John',
         lastname: 'Doe',
         email: 'john.doe@email.com',
@@ -45,7 +45,7 @@ export const CONTACTS: TContact[] = [
     },
     {
         id: '2',
-        avatar: '/assets/avatar2.png',
+        avatar: '/assets/man2.jpg',
         firstname: 'Albert',
         lastname: 'Smith',
         email: 'albert.smith@email.com',
@@ -54,7 +54,7 @@ export const CONTACTS: TContact[] = [
     },
     {
         id: '3',
-        avatar: '/assets/avatar3.png',
+        avatar: '/assets/woman1.jpg',
         firstname: 'Evelyn',
         lastname: 'Martinez',
         email: 'evelyn.martinez@email.com',
@@ -63,11 +63,38 @@ export const CONTACTS: TContact[] = [
     },
     {
         id: '4',
-        avatar: '/assets/avatar2.png',
+        avatar: '/assets/man3.jpg',
         firstname: 'Fernando',
         lastname: 'Gonzalez',
         email: 'fernando.gonzalez@email.com',
         phone: '+39 33095127383',
         type: 'client',
+    },
+    {
+        id: '5',
+        avatar: '/assets/man4.jpg',
+        firstname: 'Jon',
+        lastname: 'Simpson',
+        email: 'jon.simposn@email.com',
+        phone: '+39 6404451000',
+        type: 'employee',
+    },
+    {
+        id: '6',
+        avatar: '/assets/woman2.jpg',
+        firstname: 'Erica',
+        lastname: 'Garza',
+        email: 'erica.garza@email.com',
+        phone: '+1 2426143084',
+        type: 'employee',
+    },
+    {
+        id: '7',
+        avatar: '/assets/man5.jpg',
+        firstname: 'Jon',
+        lastname: 'Simpson',
+        email: 'jon.simposn@email.com',
+        phone: '+39 6404451000',
+        type: 'employee',
     },
 ];
