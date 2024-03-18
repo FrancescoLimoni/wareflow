@@ -1,5 +1,7 @@
 export default function Homepage() {
     return (
-        <div>Homepage</div>
+        <main className="col p-4 h-full w-full">
+            Homepage
+        </main>
     )
 }
