@@ -6,13 +6,14 @@ import { createClientServer } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 
 export default async function PrivateLayout({ children }: { children: React.ReactNode; }) {
-  const cookieStore = cookies();
-  const supabase = createClientServer(cookieStore);
-  const { data, error } = await supabase.auth.getUser();
-  const user = data?.user;
+
 
 
   // CHECK IF USER IS LOGGED IN IF NOT REDIRECT TO LOGIN PAGE
+  // const cookieStore = cookies();
+  // const supabase = createClientServer(cookieStore);
+  // const { data, error } = await supabase.auth.getUser();
+  // const user = data?.user;
   // console.log('user:', user);
   // if (error != null || user == null) return redirect('/login');
 

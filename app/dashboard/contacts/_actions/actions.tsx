@@ -1,4 +1,4 @@
-import { Contact, contacts } from "../data-table-columns";
+import { Contact, contacts } from "../dataTableColumns";
 
 export async function createContact(contact: Contact) {
     console.log('createContact');

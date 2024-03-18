@@ -1,41 +1,39 @@
-"use client"
+import { TContact } from "@/types/contact";
 
-import { ColumnDef } from "@tanstack/react-table"
-
-export type Contact = {
-    id: string,
-    avatar: string,
-    firstname: string,
-    lastname: string,
-    email: string,
-    phone: string,
-    type: "client" | "supplier" | "employee" | "other",
-}
-
-export const dataTableColumns: ColumnDef<Contact>[] = [
+export const WAREHOUSES = [
     {
-        accessorKey: 'firstname',
-        header: 'Firstname',
+        'id': 1,
+        'name': 'Mazzini 1',
+        'street': 'Via Emilia Levante 32',
     },
     {
-        accessorKey: 'lastname',
-        header: 'Lastname',
+        'id': 2,
+        'name': 'Fossolo 2',
+        'street': ' Via Roselle 16',
     },
     {
-        accessorKey: 'email',
-        header: 'Email',
+        'id': 3,
+        'name': 'Barca',
+        'street': 'Via Paolo Giovanni Martini 12',
     },
     {
-        accessorKey: 'phone',
-        header: 'Phone',
+        'id': 4,
+        'name': 'Ozzano',
+        'street': 'Via Paolo Giovanni Martini 12',
     },
     {
-        accessorKey: 'type',
-        header: 'Type',
+        'id': 5,
+        'name': 'San Lazzaro',
+        'street': 'Via Paolo Giovanni Martini 12',
+    },
+    {
+        'id': 6,
+        'name': 'Mulino Parisio',
+        'street': 'Via Paolo Giovanni Martini 12',
     },
 ];
 
-export const contacts: Contact[] = [
+export const contacts: TContact[] = [
     {
         id: '1',
         avatar: '/assets/avatar1.png',
@@ -73,4 +71,3 @@ export const contacts: Contact[] = [
         type: 'client',
     },
 ];
-

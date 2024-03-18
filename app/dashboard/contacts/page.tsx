@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { contacts } from "./data-table-columns";
+import { contacts } from "./dataTableColumns";
 import {
     Dialog,
     DialogContent,

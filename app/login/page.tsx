@@ -2,7 +2,7 @@ import Image from 'next/image'
 import image from '@/public/warehouse.png'
 import astrocode_logo from '@/public/astrocode_logo.png'
 import { Audiowide } from 'next/font/google'
-import LoginForm from '@/components/login/loginForm'
+import LoginForm from '@/app/login/_form/loginForm'
 
 export default function LoginPage() {
     // const audiowide = Audiowide({

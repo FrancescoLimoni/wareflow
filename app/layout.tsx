@@ -10,33 +10,30 @@ import Link from "next/link";
 export default function PublicLayout({ children }: { children: React.ReactNode; }) {
     const pathname = usePathname();
     const menuItems = [
-        { name: 'Home', href: '/homepage' },
-        { name: 'About', href: '/about_us' },
-        { name: 'Contact', href: '/contact' },
+        { name: 'Home', href: '/' },
+        { name: 'About', href: '/about-us' },
+        { name: 'Contact', href: '/contact-us' },
     ];
 
     // METHODS
     const hideNavBar = () => {
-        if (pathname.includes('/homepage')) return false
-        if (pathname.includes('/about_us')) return false
-        if (pathname.includes('/contact')) return false
+        if (pathname.includes('/dashboard')) return true
 
-
-        return true
+        return false
     }
 
     return (
         <html lang="en" className={GeistSans.className}>
             <body className="col bg-background text-foreground overflow-hidden w-full">
                 {
-                    hideNavBar() ? null : <header className="row space-x-4 items-center justify-between bg-white-50 h-fit w-full p-4 border-b border-black/50">
+                    hideNavBar() ? null : <header className="row space-x-4 items-center justify-between bg-white-50 h-fit w-full p-4 border-b border-black/20">
                         <Image src={logo} alt={'background image'} className='w-10 h-10 flex' style={{ "objectFit": "contain" }} />
                         <div className="row space-x-4 items-center">
                             {
                                 menuItems.map((item) => {
-                                    const defaultStyle = 'px-4 py-1 rounded-md text-black hover:text-pink-500 hover:bg-pink-50 ';
+                                    const defaultStyle = 'px-4 py-1 rounded-md text-sm text-black hover:text-pink-500 hover:bg-pink-50 ';
                                     const activeStyle = 'text-pink-500 font-medium bg-pink-50 ';
-                                    const isActive = pathname.includes(item.href);
+                                    const isActive = pathname.endsWith(item.href);
 
                                     return <a key={item.href} href={item.href} className={defaultStyle + (isActive ? activeStyle : null)}>
                                         {item.name}

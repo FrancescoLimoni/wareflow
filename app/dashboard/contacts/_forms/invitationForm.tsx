@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import SubmitInvitationButton from "../_components/submitInvitationButton";
 import { createContact } from "../_actions/actions";
-import { Contact } from "../data-table-columns";
+import { Contact } from "../dataTableColumns";
 
 export default function InvitationForm() {
 
