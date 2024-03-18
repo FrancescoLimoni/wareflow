@@ -7,7 +7,7 @@ import { FileText, LayoutDashboard, MoreVertical, Package, Users } from 'lucide-
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
 import { signOutUser } from '@/app/actions/userActions';
-import { WAREHOUSES, contacts } from '@/data/mockedData';
+import { WAREHOUSES, CONTACTS } from '@/data/mockedData';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import React, { useEffect } from 'react';
 import { Separator } from '@radix-ui/react-separator';
@@ -27,21 +27,21 @@ const MENUTABS = [
     {
         'name': 'Contatti',
         'icon': <Users size={ICONSIZE} />,
-        'href': '/contacts',
-        'notifications': contacts.length.toString(),
+        'href': '/dashboard/contacts',
+        'notifications': CONTACTS.length.toString(),
 
     },
     {
         'name': 'Ordini',
         'icon': <FileText size={ICONSIZE} />,
-        'href': '/orders',
+        'href': '/dashboard/orders',
         'notifications': '0',
 
     },
     {
         'name': 'Packaging',
         'icon': <Package size={ICONSIZE} />,
-        'href': '/packaging',
+        'href': '/dashboard/packaging',
         'notifications': '0',
 
     }

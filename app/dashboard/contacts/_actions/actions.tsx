@@ -1,11 +1,12 @@
-import { Contact, contacts } from "../dataTableColumns";
+import { CONTACTS } from '@/data/mockedData';
+import { TContact } from '@/types/contact';
 
-export async function createContact(contact: Contact) {
+export async function createContact(contact: TContact) {
     console.log('createContact');
 
     await new Promise(resolve => setTimeout(resolve, 2500));
-    contacts.push(contact);
-    console.log('contacts:', contacts);
+    CONTACTS.push(contact);
+    console.log('contacts:', CONTACTS);
     return;
 
 }

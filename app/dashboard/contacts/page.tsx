@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { contacts } from "./dataTableColumns";
+import { CONTACTS } from "@/data/mockedData";
 import {
     Dialog,
     DialogContent,
@@ -21,7 +21,7 @@ export default function ContactsPage() {
     const tabs = ['All', 'Client', 'Supplier', 'Employee'];
     const headers = ['Name', 'Email', 'Phone', 'Type', ''];
     const [selection, setSelection] = useState(0);
-    const [tableData, setTableData] = useState(contacts);
+    const [tableData, setTableData] = useState(CONTACTS);
     const activeTabStyle = 'text-sm text-center font-medium text-pink-500';
     const defaultTabStyle = 'text-sm text-center font-normal text-gray-500';
     const activeSeparatorStyle = "h-[1.6px] bg-pink-500 w-full ";
@@ -31,7 +31,7 @@ export default function ContactsPage() {
 
     useEffect(() => {
         filterTableData();
-    }, [selection, contacts]);
+    }, [selection, CONTACTS]);
 
     return <main className='col p-4 w-full h-full space-y-4'>
         <div className="row justify-between items-center">
@@ -105,7 +105,7 @@ export default function ContactsPage() {
     }
 
     function filterTableData() {
-        const contactsFiltered = contacts.filter(
+        const contactsFiltered = CONTACTS.filter(
             contact => {
                 if (tabs[selection] == 'All') return true;
                 return contact.type == tabs[selection].toLowerCase();

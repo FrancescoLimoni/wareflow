@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import SubmitInvitationButton from "../_components/submitInvitationButton";
 import { createContact } from "../_actions/actions";
-import { Contact } from "../dataTableColumns";
+import { TContact } from "@/types/contact";
 
 export default function InvitationForm() {
 
@@ -17,14 +17,14 @@ export default function InvitationForm() {
             return;
         }
 
-        const newContact: Contact = {
+        const newContact: TContact = {
             id: Math.floor(Math.random() * 1001).toString(),
             avatar: "/assets/avatar1.png",
             firstname: firstName,
             lastname: lastName,
             email: email,
             phone: "",
-            type: "client"
+            type: "Undefined"
         }
 
         // TODO: API CALL HERE TO SEND INVITATION EMAIL

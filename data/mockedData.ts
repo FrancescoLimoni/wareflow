@@ -33,7 +33,7 @@ export const WAREHOUSES = [
     },
 ];
 
-export const contacts: TContact[] = [
+export const CONTACTS: TContact[] = [
     {
         id: '1',
         avatar: '/assets/avatar1.png',

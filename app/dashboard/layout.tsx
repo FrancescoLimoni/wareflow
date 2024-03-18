@@ -1,5 +1,3 @@
-
-
 import { redirect } from "next/navigation";
 import SideMenu from "@/components/SideMenu";
 import { createClientServer } from "@/utils/supabase/server";
